@@ -27,3 +27,6 @@ setup/
 
 # Layout
 src/java/org/unicauca/stcav/model/Layout.java 
+
+# Media
+videos/
