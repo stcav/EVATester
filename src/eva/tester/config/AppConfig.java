@@ -34,7 +34,7 @@ public class AppConfig {
      public AppConfig(){
         InputStream yml = null;
         try {
-            yml = new FileInputStream(new File(System.getProperty("user.dir")+"/mb_descriptor.yml"));
+            yml = new FileInputStream(new File(System.getProperty("user.dir")+"/src/eva/tester/config/config.yml"));
             Yaml yaml = new Yaml();
             descriptor = (Map<String, String>) yaml.load(yml);
         } catch (FileNotFoundException ex) {
@@ -48,7 +48,7 @@ public class AppConfig {
         }
      }
      
-     public String getProperty(int key){
+     public String getProperty(String key){
          return descriptor.get(key);
      }
     

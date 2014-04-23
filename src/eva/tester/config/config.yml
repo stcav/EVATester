@@ -2,3 +2,4 @@
 ---
 media_path: "videos"
 video_name: "big_buck_bunny_480p_stereo.avi"
+output_path: "output"
