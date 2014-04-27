@@ -40,7 +40,6 @@ public class Tester implements Runnable{
         this.meConfig = meConfig;
         this.actions = actions;
         this.id = String.valueOf(System.currentTimeMillis());
-        this.me.setName(meConfig.getName()+this.id+"/"+ me.getName());
         this.meConfig.setName(meConfig.getName()+this.id+"/"+this.id+".mp4");
         this.rc = new RestClient();
         buildTestScenary();    
@@ -126,6 +125,8 @@ public class Tester implements Runnable{
         
         command = "cp "+this.me.getName()+" "+outputPath+"/"+this.id;
         ProcessExecutor.execute_process(command.split(" "), mediaPath, true);
+        
+        this.me.setName(meConfig.getName()+this.id+"/"+ me.getName());
         
     }
     
