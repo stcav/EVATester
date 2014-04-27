@@ -27,7 +27,7 @@ public class EVATester {
     
     public static void main(String[] args) throws InterruptedException, IOException {
         AppConfig appConfig = AppConfig.getInstance();
-        MediaElement me = Processor.get_mediaElement("16_9.avi", System.getProperty("user.dir")+"/"+appConfig.getProperty("media_path"), true);
+        MediaElement me = Processor.get_mediaElement("16_9.mp4", System.getProperty("user.dir")+"/"+appConfig.getProperty("media_path"), true);
         MediaElement meConfig = new MediaElement(new AudioElement("libfdk_aac", "48000", "stereo", "224k"), new VideoElement("libx264", "1280x720", "16:9", "2000k", "25"), System.getProperty("user.dir")+"/"+appConfig.getProperty("output_path")+ "/");
         System.out.println("-->"+ me.getName());
         List actions = new ArrayList();
