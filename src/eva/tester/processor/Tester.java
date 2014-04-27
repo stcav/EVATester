@@ -5,6 +5,7 @@
 package eva.tester.processor;
 
 import eva.tester.config.AppConfig;
+import eva.tester.conn.RestClient;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Iterator;
@@ -29,16 +30,31 @@ public class Tester implements Runnable{
     private String id;
     // Action List
     private List<Integer> actions;
+    // execute from local
+    private Boolean executeFromLocal = false;
+    // communication interface
+    private RestClient rc;
 
     public Tester(MediaElement me, MediaElement meConfig, List actions) throws UnknownHostException, InterruptedException, IOException {
         this.me = me;
         this.meConfig = meConfig;
         this.actions = actions;
         this.id = String.valueOf(System.currentTimeMillis());
+        this.me.setName(meConfig.getName()+this.id+"/"+ me.getName());
+        this.meConfig.setName(meConfig.getName()+this.id+"/"+this.id+".mp4");
+        this.rc = new RestClient();
         buildTestScenary();    
     }
+
+    public Boolean getExecuteFromLocal() {
+        return executeFromLocal;
+    }
+
+    public void setExecuteFromLocal(Boolean executeFromLocal) {
+        this.executeFromLocal = executeFromLocal;
+    }
     
-    public void execute(int process) throws InterruptedException, IOException{
+    public String getCommand(int process) throws InterruptedException, IOException{
         AppConfig appConfig = AppConfig.getInstance();
         String command = "";
         switch(process){
@@ -72,17 +88,29 @@ public class Tester implements Runnable{
                 break;
         }
         System.err.println("--> command: "+command);
+        return command;
     }
 
     @Override
     public void run() {
+        AppConfig appConfig=null;
+        try {
+            appConfig = AppConfig.getInstance();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Iterator iterator = actions.iterator();
+        String command;
         while(iterator.hasNext()){
             try {
-                execute((Integer) iterator.next());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+                command = getCommand((Integer) iterator.next());
+                if(!executeFromLocal){
+                    String response = rc.get(appConfig.getProperty("process_executor_server_url") + command.replace(" ", "¬"));
+                    System.out.println("[LOG] from <"+id+"> :"+response);
+                }else{
+                    ProcessExecutor.execute_process(command.split(" "), "/", true);
+                }
+            } catch (    InterruptedException | IOException ex) {
                 Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

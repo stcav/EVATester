@@ -34,6 +34,5 @@ public class EVATester {
         actions.add(Tester.RESIZE_VIDEO_HD);
         Tester tester = new Tester(me, meConfig, actions);
         tester.run();
-        //tester.execute(0);
     }
 }
