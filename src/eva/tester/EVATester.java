@@ -42,9 +42,13 @@ public class EVATester {
         
         List actions = new ArrayList();
         actions.add(Tester.RESIZE_VIDEO_HD);
+        actions.add(Tester.CUT_VIDEO_HD);
+        actions.add(Tester.INSERT_TEXT_FROM_FILE_TO_VIDEO);
         
         List<Tester> threadMaster = new ArrayList<>();
         Iterator iter;
+        threadMaster.add(new Tester(new MediaElement(me_16_9), new MediaElement(meConfig), actions));
+        threadMaster.add(new Tester(new MediaElement(me_16_9), new MediaElement(meConfig), actions));
         threadMaster.add(new Tester(new MediaElement(me_16_9), new MediaElement(meConfig), actions));
         iter = threadMaster.iterator();
         
