@@ -40,12 +40,11 @@ public class EVATester {
         report.setDate(new Date(System.currentTimeMillis()));
         
         List actions = new ArrayList();
-        actions.add(12);
+        actions.add(Tester.RESIZE_VIDEO_HD);
         
         List<Tester> threadMaster = new ArrayList<>();
         Iterator iter;
-        threadMaster.add(new Tester(me_16_9, meConfig, actions));
-        
+        threadMaster.add(new Tester(new MediaElement(me_16_9), new MediaElement(meConfig), actions));
         iter = threadMaster.iterator();
         
         while(iter.hasNext()){
