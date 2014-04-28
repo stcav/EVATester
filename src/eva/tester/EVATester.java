@@ -7,6 +7,7 @@ package eva.tester;
 import com.google.gson.Gson;
 import eva.tester.config.AppConfig;
 import eva.tester.model.Report;
+import eva.tester.processor.FileProcessor;
 import eva.tester.processor.Tester;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,6 @@ public class EVATester {
         }
              
         Gson gson = new Gson();
-        System.err.println("output: "+gson.toJson(report));
+        FileProcessor.do_file_write(System.getProperty("user.dir")+"/"+appConfig.getProperty("output_path")+"/"+appConfig.getProperty("report_file_name"), gson.toJson(report));
     }
 }
