@@ -130,10 +130,10 @@ public class Tester implements Runnable{
                 mes.add(me);
                 mes.add(me);
                 mes.add(me);
-                command = Processor.do_merge_videos_x264_return( mes, originPath, meConfig.getName(), false, false);
-                String tsPath = System.getProperty("user.dir")+"/"+appConfig.getProperty("output_path")+ "/";
+                String tsPath = System.getProperty("user.dir")+"/"+appConfig.getProperty("output_path")+ "/"+this.id;
+                command = Processor.do_merge_videos_x264_return( mes, tsPath, meConfig.getName(), false, false);              
                 // add tsPath in order to set ts path in remote excute server
-                command = command.replace(" ", "¬")+"*"+originPath+"*";
+                command = command.replace(" ", "¬")+"*"+tsPath+"*";
                 break;
             default:
                 break;

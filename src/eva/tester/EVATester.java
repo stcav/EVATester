@@ -40,11 +40,11 @@ public class EVATester {
         report.setDate(new Date(System.currentTimeMillis()));
         
         List actions = new ArrayList();
-        actions.add(1);
+        actions.add(12);
         
         List<Tester> threadMaster = new ArrayList<>();
         Iterator iter;
-        threadMaster.add(new Tester(me_4_3, meConfig, actions));
+        threadMaster.add(new Tester(me_16_9, meConfig, actions));
         
         iter = threadMaster.iterator();
         
