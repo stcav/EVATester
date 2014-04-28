@@ -42,7 +42,7 @@ public class EVATester {
         List actions = new ArrayList();
         actions.add(1);
         
-        List<Tester> threadMaster = new ArrayList<Tester>();
+        List<Tester> threadMaster = new ArrayList<>();
         Iterator iter;
         threadMaster.add(new Tester(me_4_3, meConfig, actions));
         
